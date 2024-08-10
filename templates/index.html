@@ -35,40 +35,7 @@
             transform: scale(1.02);
         }
         
-        .carousel-open:checked + .carousel-item {
-            position: static;
-            opacity: 100;
-        }
         
-        .carousel-item {
-            -webkit-transition: opacity 0.6s ease-out;
-            transition: opacity 0.6s ease-out;
-        }
-        
-        #carousel-1:checked ~ .control-1,
-        #carousel-2:checked ~ .control-2,
-        #carousel-3:checked ~ .control-3 {
-            display: block;
-        }
-        
-        .carousel-indicators {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            bottom: 2%;
-            left: 0;
-            right: 0;
-            text-align: center;
-            z-index: 10;
-        }
-        
-        #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-        #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-        #carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
-            color: #000;
-            /*Set to match the Tailwind colour you want the active one to be */
-        }
     </style>
 
 </head>
@@ -104,10 +71,12 @@
     
             <div class="order-1 md:order-2">
                 <a class="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="/">
-                    <div class="flex items-center space-x-2">
+                    <div class="flex items-center space-x-1">
                         <img src="{% static 'img/my logo.jpg' %}" alt="Logo" class="h-12">
                     </div>
-                    OMYC MEDIA
+                     
+                    <div style="padding-right: 50px;"> OMYC MEDIA</div>
+                   
                 </a>
             </div>
     
@@ -153,7 +122,7 @@
 
     <section class="bg-white py-8"id="services">
 
-        <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+        <div class="container mx-auto flex items-center flex-wrap pt-1 pb-12">
 
             <nav id="store" class="container py-8 px-6 mx-auto px-6 py-5">
                 <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
@@ -270,16 +239,11 @@
                             <i class="fab fa-youtube" style="font-size: 16px;"></i>
                         </a>
                     </a>
-    
-                 
-           
-                        <a class="nav-link" href="https://wa.me/+233506632349">
-                            &copy;<small>SM_Jay</small>&nbsp;<i class="fab fa-whatsapp" style="font-size: 14px;"></i>
-                       </a>
+                        
                     </a>
                     </nav>
                    
-                       
+
                        
                         
                     </div>
@@ -290,6 +254,10 @@
         
             </div>
         </div>
+     
+        <a class="nav-link" href="https://wa.me/+233506632349">
+            <center> &copy;<small>SM_Jay</small>&nbsp;<i class="fab fa-whatsapp" style="font-size: 14px;"></i></center>
+        </a>
     </footer>	
 
 </body>

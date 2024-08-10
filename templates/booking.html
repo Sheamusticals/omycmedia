@@ -111,7 +111,7 @@
                     <div class="flex items-center space-x-2">
                         <img src="{% static 'img/my logo.jpg' %}" alt="Logo" class="h-12">
                     </div>
-                    OMYC MEDIA
+                    <div style="padding-right: 50px;"> OMYC MEDIA</div>
                 </a>
             </div>
     
@@ -159,7 +159,9 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     {{ form.date.errors }}
+                                    <label>Date:
                                     <input type="date" class="form-control" id="date" name="date" value="{{ form.data.date }}">
+                                </label>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     {{ form.service_type.errors }}
@@ -174,7 +176,9 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     {{ form.time.errors }}
+                                    <label>Time:
                                     <input type="time" class="form-control" id="time" name="time" value="{{ form.data.time }}">
+                                </label>
                                 </div>
                                 <div class="col-md-12 text-center">
                                     <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit" id="submit-btn">Submit</button>
@@ -233,12 +237,11 @@
                         
                     </div>
                 </div>
-                
-            </div>
-        </div>
+            
         
-            </div>
-        </div>
+        <a class="nav-link" href="https://wa.me/+233506632349">
+            <center> &copy;<small>SM_Jay</small>&nbsp;<i class="fab fa-whatsapp" style="font-size: 14px;"></i></center>
+        </a>
     </footer>	
 
 </body>
