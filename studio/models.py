@@ -125,18 +125,4 @@ class Radio_Comment(models.Model):
     def __str__(self):
         return self.comment[:20]
 
-     
-class Program_Schedule(models.Model):
-    days = [
-        ('monday', 'Monday'),
-        ('tuesday', 'Tuesday'),
-        ('wednesday', 'Wednesday'),
-        ('thursday','Thursday'),
-        ('friday','Friday'),
-        ('saturday','Saturday'),
-        ('sunday','Sunday')
-    ]
-    program_name = models.CharField(max_length=255)
-    day = models.CharField(max_length= 10,choices=days)
-    start= models.TimeField(blank=True,null=True)
-    end = models.TimeField(blank=True,null=True) 
+   

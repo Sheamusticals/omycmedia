@@ -94,6 +94,9 @@
     
         </div>
     </nav>
+    <br>
+    <br>
+    <br>
     <center><img src="{% static 'img/radio.png' %}" alt="logo"></center>
 
 <center><iframe src="https://zeno.fm/player/omyc-radio" width="575" height="250" frameborder="0" scrolling="no"></iframe><a href="https://zeno.fm/" target="_blank" style="display: block; font-size: 0.9em; line-height: 10px;">A Zeno.FM Station</a></center>
@@ -126,11 +129,7 @@
         margin: 0;
         padding: 0;
     }
-    .container {
-        width: 80%;
-        margin: auto;
-        overflow: hidden;
-    }
+
     h1 {
         color: #333;
     }
@@ -153,7 +152,7 @@
         border: 1px solid #ddd;
         border-radius: 4px;
         margin-bottom: 10px;
-        font-size: 16px;
+        font-size: 12px;
     }
     .comment-form button {
         background: #333;
@@ -188,34 +187,7 @@
     }
 </style>
 <br>
-
-<div class="container mt-5">
-    <h1 class="mb-4">Program Schedules</h1>
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>Program</th>
-                <th>Day</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for schedule in schedules %}
-                <tr>
-                    <td>{{ schedule.name }}</td>
-                    <td>{{ schedule.get_day_display }}</td>
-                    <td>{{ schedule.start|time:"H:i" }}</td>
-                    <td>{{ schedule.end|time:"H:i" }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4" class="text-center">No schedules available.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+<center><iframe height="400px" width="550px" scrolling="no" frameborder="0" src="https://lssydnkqrsyvv.pl.zeno.fm/embed/weekly-program"></iframe></center>
 
 
 <div id="blog-section" class="bg-grey">

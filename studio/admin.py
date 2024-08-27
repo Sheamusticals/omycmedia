@@ -9,7 +9,7 @@ admin.site.register(Comment)
 admin.site.register(Type)
 admin.site.register(Gallery)
 admin.site.register(Radio_Comment)
-admin.site.register(Program_Schedule)
+
 
 @admin.register(BookingStatus)
 class BookingStatusAdmin(admin.ModelAdmin):

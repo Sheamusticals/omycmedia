@@ -60,7 +60,7 @@ def blog(request):
         form = RadioCommentForm()
     comments = Radio_Comment.objects.all()
 
-    schedules = Program_Schedule.objects.all()
+   
     context = {
         'page_obj': page_obj,
         'types': types,
