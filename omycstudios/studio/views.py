@@ -1,12 +1,11 @@
 
 from django.shortcuts import render ,get_object_or_404,redirect
-from .forms import ContactForm,CommentForm,BookingForm
+from .forms import *
 from .models import *
 from django.db.models import Count
 from django.http import JsonResponse
 from django.db.models.functions import ExtractMonth, ExtractYear
 from django.core.paginator import Paginator
-# Create your views here.
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
@@ -46,14 +45,29 @@ def blog(request):
     paginator = Paginator(blogs, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    if request.method == 'POST':
+        form = RadioForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+      
+            comment.save()
+            return redirect('blog')
+    else:
+        form = RadioForm()
 
+    comments = Radio_Comment.objects.all()
+    schedules = Program_Schedule.objects.all()
     types = Type.objects.all()
-
     context = {
         'page_obj': page_obj,
         'types': types,
         'archive_dates': archive_dates,
+        'comments':comments,
+        'form':form,
+        'schedules':schedules
     }
+    
+
 
     return render(request, 'blog.html', context)
 
@@ -77,6 +91,7 @@ def post(request, blog_id):
 
     form = CommentForm()
     return render(request, 'post.html', {'blog': blog, 'form': form, 'comments': comments})
+
 def blog_by_type(request, type_id):
     blog_type = get_object_or_404(Type, pk=type_id)
     blogs = Blog.objects.filter(type=blog_type).select_related('type').order_by('-date')

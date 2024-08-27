@@ -1,5 +1,6 @@
 from django.db import models,transaction
-
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 # Create your models here.
 
 class Contact(models.Model):
@@ -58,7 +59,7 @@ class Comment(models.Model):
 
 class Gallery(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(blank=True,null=True) 
+    image = models.ImageField(upload_to='media/') 
 
     
     def __str__(self):
@@ -115,3 +116,33 @@ class BookingStatus(models.Model):
         return f"{self.booking.name} - {self.get_status_display()}"
     class Meta:
         verbose_name_plural = "Booking Status"
+
+class Radio_Comment(models.Model):
+    name = models.CharField
+    content = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.content[:20]
+class Program_Schedule(models.Model):
+    DAYS_OF_WEEK = [
+        ('monday', 'Monday'),
+        ('tuesday', 'Tuesday'),
+        ('wednesday', 'Wednesday'),
+        ('thursday', 'Thursday'),
+        ('friday', 'Friday'),
+        ('saturday', 'Saturday'),
+        ('sunday', 'Sunday'),
+    ]
+    
+    name = models.CharField(max_length=255)
+    day = models.CharField(max_length=10, choices=DAYS_OF_WEEK)
+    start = models.TimeField(blank=True, null=True)
+    end = models.TimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+    
+    
+    
+

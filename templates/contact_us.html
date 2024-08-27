@@ -85,12 +85,18 @@
     <nav id="header" class="w-full z-30 top-0 py-4 fixed bg-white shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-0 py-0">
     
-            <label for="menu-toggle" class="cursor-pointer md:hidden block">
-                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+            <button id="menu-button" class="md:hidden block">
+                <!-- Menu Icon -->
+                <svg id="menu-icon" class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                     <title>menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                 </svg>
-            </label>
+                <!-- Close Icon (hidden by default) -->
+                <svg id="close-icon" class="fill-current text-gray-900 hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <title>close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 12.207l-2.651 2.641a1.2 1.2 0 01-1.697-1.697l2.641-2.651-2.641-2.651a1.2 1.2 0 011.697-1.697L10 9.793l2.651-2.641a1.2 1.2 0 011.697 1.697L12.207 10l2.641 2.651a1.2 1.2 0 010 1.697z"></path>
+                </svg>
+            </button>
             <input class="hidden" type="checkbox" id="menu-toggle" />
     
             <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
@@ -158,6 +164,47 @@
                                   </div>
                               </div>
                           </form>
+                          <style>/* styles/contact-form.css */
+                            .contact-form-holder {
+                                background: #f9f9f9;
+                                padding: 20px;
+                                border-radius: 8px;
+                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                            }
+                            
+                            .contact-form-holder .form-group {
+                                margin-bottom: 15px;
+                            }
+                            
+                            .contact-form-holder .form-control {
+                                width: 100%;
+                                padding: 12px;
+                                border-radius: 4px;
+                                border: 1px solid #ddd;
+                                box-sizing: border-box;
+                                font-size: 16px;
+                            }
+                            
+                            .contact-form-holder .form-control:focus {
+                                border-color: #0056b3;
+                                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                                outline: none;
+                            }
+                            
+                       
+                            .contact-form-holder .error-message {
+                                color: #d9534f;
+                                font-size: 14px;
+                                margin-bottom: 5px;
+                            }
+                            
+                            /* Responsive Design */
+                            @media (max-width: 768px) {
+                                .contact-form-holder {
+                                    padding: 15px;
+                                }
+                            }
+                            </style>
       
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       
@@ -166,6 +213,74 @@
                       </div>
                       </div>
           </div>
+          <style>/* styles/comments.css */
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 80%;
+                margin: auto;
+                overflow: hidden;
+            }
+            h1 {
+                color: #333;
+            }
+            .comment-form {
+                background: #f4f4f4;
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }
+            .comment-form form {
+                display: flex;
+                flex-direction: column;
+            }
+            .comment-form label {
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+            .comment-form input, .comment-form textarea {
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+            .comment-form button {
+                background: #333;
+                color: #fff;
+                border: none;
+                padding: 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .comment-form button:hover {
+                background: #555;
+            }
+            .comments-list {
+                list-style: none;
+                padding: 0;
+            }
+            .comments-list li {
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+            .comment-author {
+                font-weight: bold;
+                color: #333;
+            }
+            .comment-date {
+                font-size: 0.9em;
+                color: #888;
+            }
+            </style>
       </section>
                       </div>
 
@@ -229,7 +344,27 @@
 	 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 	<script src="{% static 'js/app.min.js ' %}"></script>
       <script async src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
-	 
+	  <script>document.addEventListener("DOMContentLoaded", function() {
+        var menuButton = document.getElementById('menu-button');
+        var menuIcon = document.getElementById('menu-icon');
+        var closeIcon = document.getElementById('close-icon');
+        var menu = document.getElementById('menu');
+    
+        menuButton.addEventListener('click', function() {
+            // Toggle the menu's visibility
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+                closeIcon.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+            }
+        });
+    });
+    
+        </script>
 
 </html>
 

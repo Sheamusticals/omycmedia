@@ -1,6 +1,6 @@
 
 from django.shortcuts import render ,get_object_or_404,redirect
-from .forms import ContactForm,CommentForm,BookingForm
+from .forms import *
 from .models import *
 from django.db.models import Count
 from django.http import JsonResponse
@@ -48,13 +48,28 @@ def blog(request):
     page_obj = paginator.get_page(page_number)
 
     types = Type.objects.all()
+    
 
+    if request.method == 'POST':
+        form = RadioCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.save()
+            return redirect('blog')
+    else:
+        form = RadioCommentForm()
+    comments = Radio_Comment.objects.all()
+
+    schedules = Program_Schedule.objects.all()
     context = {
         'page_obj': page_obj,
         'types': types,
         'archive_dates': archive_dates,
-    }
+        'form': form,
+        'comments':comments,
+        'schedules':'schedules',
 
+    }
     return render(request, 'blog.html', context)
 
 

@@ -37,3 +37,7 @@ class BookingForm(forms.ModelForm):
             'time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
             'service_type': forms.Select(choices=Booking.SERVICE_TYPE_CHOICES, attrs={'class': 'form-control'}),
         }
+class RadioForm(forms.ModelForm):
+    class Meta:
+        model = Radio_Comment
+        fields = ['content']

@@ -3,6 +3,8 @@
 <html lang="en">
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -43,40 +45,7 @@
             transform: scale(1.02);
         }
         
-        .carousel-open:checked + .carousel-item {
-            position: static;
-            opacity: 100;
-        }
-        
-        .carousel-item {
-            -webkit-transition: opacity 0.6s ease-out;
-            transition: opacity 0.6s ease-out;
-        }
-        
-        #carousel-1:checked ~ .control-1,
-        #carousel-2:checked ~ .control-2,
-        #carousel-3:checked ~ .control-3 {
-            display: block;
-        }
-        
-        .carousel-indicators {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            bottom: 2%;
-            left: 0;
-            right: 0;
-            text-align: center;
-            z-index: 10;
-        }
-        
-        #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-        #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-        #carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
-            color: #000;
-            /*Set to match the Tailwind colour you want the active one to be */
-        }
+  
     </style>
 
 </head>
@@ -87,12 +56,18 @@
     <nav id="header" class="w-full z-30 top-0 py-4 fixed bg-white shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-0 py-0">
     
-            <label for="menu-toggle" class="cursor-pointer md:hidden block">
-                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+            <button id="menu-button" class="md:hidden block">
+                <!-- Menu Icon -->
+                <svg id="menu-icon" class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                     <title>menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                 </svg>
-            </label>
+                <!-- Close Icon (hidden by default) -->
+                <svg id="close-icon" class="fill-current text-gray-900 hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <title>close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 12.207l-2.651 2.641a1.2 1.2 0 01-1.697-1.697l2.641-2.651-2.641-2.651a1.2 1.2 0 011.697-1.697L10 9.793l2.651-2.641a1.2 1.2 0 011.697 1.697L12.207 10l2.641 2.651a1.2 1.2 0 010 1.697z"></path>
+                </svg>
+            </button>
             <input class="hidden" type="checkbox" id="menu-toggle" />
     
             <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
@@ -103,7 +78,7 @@
                         <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4 nav-link scrollto" href="{% url 'index' %}#about">About</a></li>
                         <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4 nav-link scrollto" href="{% url 'blog' %}">Blog</a></li>
                         <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4 nav-link scrollto" href="{% url 'contact' %}">Contact</a></li>
-                        <li class="col-md-5 text-center"> <a href="{% url 'booking' %}"class="btn btn-primary btn-shadow btn-lg" ><button>Book Us</button></a></li>
+                        <li class="col-md-52 text-center"> <a href="{% url 'booking' %}"class="btn btn-primary btn-shadow btn-lg" ><button>Book Us</button></a></li>
                     </ul>
                 </nav>
             </div>
@@ -119,10 +94,129 @@
     
         </div>
     </nav>
- 
+    <center><img src="{% static 'img/radio.png' %}" alt="logo"></center>
 
+<center><iframe src="https://zeno.fm/player/omyc-radio" width="575" height="250" frameborder="0" scrolling="no"></iframe><a href="https://zeno.fm/" target="_blank" style="display: block; font-size: 0.9em; line-height: 10px;">A Zeno.FM Station</a></center>
+<div class="container">
+    <h2>Comments</h2>
+    <div class="comment-form">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Comment</button>
+        </form>
+    </div>
+
+    <ul class="comments-list">
+        {% for comment in comments %}
+            <li>
+                <div class="comment-author">{{ comment.commenter_name }}</div>
+                <p>{{ comment.comment }}</p>
+                <div class="comment-date">{{ comment.date_posted }}</div>
+            </li>
+        {% empty %}
+            <li>No comments yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
+    h1 {
+        color: #333;
+    }
+    .comment-form {
+        background: #f4f4f4;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    .comment-form form {
+        display: flex;
+        flex-direction: column;
+    }
+    .comment-form label {
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    .comment-form input, .comment-form textarea {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+    .comment-form button {
+        background: #333;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .comment-form button:hover {
+        background: #555;
+    }
+    .comments-list {
+        list-style: none;
+        padding: 0;
+    }
+    .comments-list li {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+    .comment-author {
+        font-weight: bold;
+        color: #333;
+    }
+    .comment-date {
+        font-size: 0.9em;
+        color: #888;
+    }
+</style>
 <br>
-<br>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Program Schedules</h1>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Program</th>
+                <th>Day</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schedule in schedules %}
+                <tr>
+                    <td>{{ schedule.name }}</td>
+                    <td>{{ schedule.get_day_display }}</td>
+                    <td>{{ schedule.start|time:"H:i" }}</td>
+                    <td>{{ schedule.end|time:"H:i" }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No schedules available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 
 <div id="blog-section" class="bg-grey">
     <div class="container">
@@ -159,25 +253,27 @@
                   
                 </div>
               </div>
+              {% for blog in page_obj %}  
             <div class="row">
-       
+             
 <div class="col-md-12 blog-holder">
+  
     <div class="row">
  
-        {% for blog in page_obj %}
+       
         <div class="col-md-4 blog-item-wrapper" data-aos="fade-up">
             <div class="blog-item">
                 <div class="blog-img">
            
-                    <a href="{% url 'post' blog_id=blog.pk  %}"><img src="{{blog.imageURL}}" alt=""></a>
+                    <a href="{% url 'post' blog_id=blog.pk  %}"><img src="{% static '{{blog.imageURL}}' %}" alt="post"></a>
               
                 </div>
                 <div class="blog-text">
                     <div class="blog-title">
-                        <a href="{% url 'post' blog_id=blog.pk  %}"><h4>{{blog.title}}</h4></a>
+                        <a href="{% url 'post' blog_id=blog.pk  %}"><h4><b>{{blog.title}}</b></h4></a>
                     </div>
                     <div class="blog-meta">
-                        <p class="blog-date">Published on:{{blog.date}}</p>
+                        <p class="blog-date"><b>Published on:{{blog.date}}</b></p>
                        
                     </div>
                     <div class="blog-desc">
@@ -261,7 +357,27 @@
     </a>
 </footer>	</center>
 
-    
+<script>document.addEventListener("DOMContentLoaded", function() {
+    var menuButton = document.getElementById('menu-button');
+    var menuIcon = document.getElementById('menu-icon');
+    var closeIcon = document.getElementById('close-icon');
+    var menu = document.getElementById('menu');
+
+    menuButton.addEventListener('click', function() {
+        // Toggle the menu's visibility
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+        } else {
+            menu.classList.add('hidden');
+            closeIcon.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+        }
+    });
+});
+
+    </script>
 
 </body>
 

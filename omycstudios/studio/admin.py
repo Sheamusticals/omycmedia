@@ -9,6 +9,11 @@ admin.site.register(Comment)
 admin.site.register(Type)
 admin.site.register(Gallery)
 
+admin.site.register(Radio_Comment)
+@admin.register(Program_Schedule)
+class ProgramScheduleAdmin(admin.ModelAdmin):
+    list_display = ('name', 'day', 'start', 'end')
+
 @admin.register(BookingStatus)
 class BookingStatusAdmin(admin.ModelAdmin):
     list_display = ('booking', 'status', 'updated_at')

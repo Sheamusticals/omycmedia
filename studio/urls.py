@@ -1,6 +1,8 @@
 from . import views
 from django.urls import path
 
+
+
 urlpatterns = [
     path('',views.index,name='index'),
     path('contact_us/',views.contact_us,name='contact'),
@@ -10,4 +12,5 @@ urlpatterns = [
     path('archive/<int:year>/<int:month>/', views.archive, name='archive'),
     path('gallery/',views.gallery,name='gallery'),
     path('booking/',views.booking,name='booking'),
+
 ]

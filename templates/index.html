@@ -8,7 +8,7 @@
     <title>Omyc Media</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
-	 <link rel="icon" href="{% static 'img/my logo.jpg' %}" type="image/png">
+    <link rel="icon" href="{% static 'img/my logo.jpg' %}" type="image/png">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Work+Sans:300,400,700" rel="stylesheet">
@@ -45,15 +45,25 @@
     <!--Nav-->
     <nav id="header" class="w-full z-30 top-0 py-4 fixed bg-white shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-0 py-0">
-    
-            <label for="menu-toggle" class="cursor-pointer md:hidden block">
-                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+            <button id="menu-button" class="md:hidden block">
+                <!-- Menu Icon -->
+                <svg id="menu-icon" class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                     <title>menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                 </svg>
-            </label>
+                <!-- Close Icon (hidden by default) -->
+                <svg id="close-icon" class="fill-current text-gray-900 hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <title>close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 12.207l-2.651 2.641a1.2 1.2 0 01-1.697-1.697l2.641-2.651-2.641-2.651a1.2 1.2 0 011.697-1.697L10 9.793l2.651-2.641a1.2 1.2 0 011.697 1.697L12.207 10l2.641 2.651a1.2 1.2 0 010 1.697z"></path>
+                </svg>
+            </button>
             <input class="hidden" type="checkbox" id="menu-toggle" />
-    
+            <label for="menu-toggle" class="cursor-pointer md:hidden block" id="close-menu" style="display:none;">
+                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <title>close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 12.207l-2.651 2.641a1.2 1.2 0 01-1.697-1.697l2.641-2.651-2.641-2.651a1.2 1.2 0 011.697-1.697L10 9.793l2.651-2.641a1.2 1.2 0 011.697 1.697L12.207 10l2.641 2.651a1.2 1.2 0 010 1.697z"></path>
+                </svg>
+            </label>
             <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
                 <nav>
                     <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
@@ -63,6 +73,7 @@
                         <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4 nav-link scrollto" href="{% url 'blog' %}">Blog</a></li>
                         <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4 nav-link scrollto" href="{%url 'contact'%}">Contact</a></li>
                         <li class="col-md-5 text-center"> <a href="{% url 'booking' %}"class="btn btn-primary btn-shadow btn-lg" ><button>Book Us</button></a></li>
+                     
                            
                         
                     </ul>
@@ -252,7 +263,74 @@
                 
             </div>
         </div>
-        
+        <style>/* styles/comments.css */
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 80%;
+                margin: auto;
+                overflow: hidden;
+            }
+            h1 {
+                color: #333;
+            }
+            .comment-form {
+                background: #f4f4f4;
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }
+            .comment-form form {
+                display: flex;
+                flex-direction: column;
+            }
+            .comment-form label {
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+            .comment-form input, .comment-form textarea {
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+            .comment-form button {
+                background: #333;
+                color: #fff;
+                border: none;
+                padding: 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .comment-form button:hover {
+                background: #555;
+            }
+            .comments-list {
+                list-style: none;
+                padding: 0;
+            }
+            .comments-list li {
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+            .comment-author {
+                font-weight: bold;
+                color: #333;
+            }
+            .comment-date {
+                font-size: 0.9em;
+                color: #888;
+            }
+            </style>
             </div>
         </div>
     
@@ -263,5 +341,25 @@
        
     
 </body>
+<script>document.addEventListener("DOMContentLoaded", function() {
+    var menuButton = document.getElementById('menu-button');
+    var menuIcon = document.getElementById('menu-icon');
+    var closeIcon = document.getElementById('close-icon');
+    var menu = document.getElementById('menu');
 
+    menuButton.addEventListener('click', function() {
+        // Toggle the menu's visibility
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+        } else {
+            menu.classList.add('hidden');
+            closeIcon.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+        }
+    });
+});
+
+    </script>
 </html>
